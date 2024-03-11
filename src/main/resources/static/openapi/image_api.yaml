@@ -1,0 +1,130 @@
+openapi: 3.0.3
+info:
+  title: Image tagging application
+  description: Веб-приложение выставления тегов к загруженному изображению
+  version: 1.0.1
+servers:
+  - url: http://localhost:8080
+paths:
+  /images/load:
+    post:
+      summary: Загрузить изображение
+      tags:
+        - saveImage
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageModel'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Image not found
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Error creating the image
+  /images:
+    get:
+      summary: Получить список всех изображений
+      tags:
+        - allImage
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageModel'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Image not found
+  /images/{id}:
+    get:
+      summary: Получить изображение по ID
+      tags:
+        - getImageById
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageModel'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Image not found
+    delete:
+      summary: Удалить изображение по ID
+      tags:
+        - deleteImage
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Successful delete
+
+components:
+  schemas:
+    ImageModel:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        imageName:
+          type: string
+        imageUrl:
+          type: string
+        tags:
+          type: string
+        imageData:
+          type: string
+          format: byte

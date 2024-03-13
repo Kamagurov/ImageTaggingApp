@@ -1,16 +1,15 @@
 package codeinside.imagetaggingapp.service;
 
+import codeinside.imagetaggingapp.model.ImageModel;
+import codeinside.imagetaggingapp.repositories.ImageRepository;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
-
-import codeinside.imagetaggingapp.model.ImageModel;
-import codeinside.imagetaggingapp.repositories.ImageRepository;
-import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Service;
-import org.springframework.util.Base64Utils;
 
 @Service
 @AllArgsConstructor

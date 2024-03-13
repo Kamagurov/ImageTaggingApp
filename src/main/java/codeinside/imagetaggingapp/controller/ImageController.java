@@ -9,13 +9,14 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
 @RestController
-@RequestMapping("/images")
+@RequestMapping
 @RequiredArgsConstructor
 public class ImageController {
 
@@ -34,12 +35,14 @@ public class ImageController {
         }
     }
 
-    @GetMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
     public List<ImageModel> getAllImages() {
         return imageService.getAllImages();
     }
 
-    @GetMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ImageModel> getImageById(@PathVariable Long id) {
         ImageModel image = imageService.getImageById(id);
         if (image != null) {

@@ -27,4 +27,7 @@ public class ImageModel {
     @Lob
     private byte[] imageData;
 
+    @Lob
+    private byte[] imageBytes;
+
 }

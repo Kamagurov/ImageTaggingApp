@@ -1,0 +1,173 @@
+openapi 3.0.0
+info
+  title Сложение, Вычитание, Умножение
+  version 0.0.1
+servers
+  - url httpslocalhost8080
+    description Development server
+paths
+  create
+    get
+      summary Метод создания модели
+      tags
+        - create
+      operationId createModel
+      responses
+        '200'
+          description OK
+          content
+            applicationjson
+              schema
+                $ref #componentsschemasMathModel
+        '400'
+          description Bad Request
+          content
+            applicationjson
+              schema
+                $ref #componentsschemasMathModel
+        '500'
+          description Internal Server Error
+          content
+            applicationjson
+              schema
+                $ref #componentsschemasMathModel
+                
+  test
+    post
+      summary Взаимодействие микросервисов
+      tags
+        - RequestToMathCalculation
+      operationId requestCalc
+      requestBody
+        required true
+        content
+          applicationjson
+            schema
+              $ref #componentsschemasMathModel
+      responses
+        '200'
+          description OK
+          content
+            applicationjson
+              schema
+                $ref #componentsschemasMathModel
+        '400'
+          description Bad Request
+          content
+            applicationjson
+              schema
+                $ref #componentsschemasMathModel
+        '500'
+          description Internal Server Error
+          content
+            applicationjson
+              schema
+                $ref #componentsschemasMathModel
+  calc
+    post
+      summary Запрос json на вычисление
+      tags
+        - calculate
+      operationId getCalc
+      requestBody
+        required true
+        content
+          applicationjson
+            schema
+              $ref #componentsschemasMathModel
+      responses
+        '200'
+          description OK
+          content
+            applicationjson
+              schema
+                type string
+        '400'
+          description Bad Request
+          content
+            applicationjson
+              schema
+                $ref #componentsschemasMathModel
+        '500'
+          description Internal Server Error
+          content
+            applicationjson
+              schema
+                $ref #componentsschemasMathModel
+                
+  message
+    post
+      summary Проверка имени, фамилии, номера телефона
+      tags
+        - userData
+      operationId process
+      requestBody
+        required true
+        content
+          applicationjson
+            schema
+              $ref #componentsschemasEmailModel
+      responses
+        '200'
+          description OK
+          content
+            applicationjson
+              schema
+                type string
+        '400'
+          description Bad Request
+          content
+            applicationjson
+              schema
+                $ref #componentsschemasEmailModel
+        '500'
+          description Internal Server Error
+          content
+            applicationjson
+              schema
+                $ref #componentsschemasEmailModel
+
+
+components
+  schemas
+    MathModel
+      type object
+      required
+        - digitOne
+        - digitTwo
+        - action
+      properties
+        digitOne
+          type integer
+          example 7
+        digitTwo
+          type integer
+          example 3
+        action
+          type string
+          example multiply
+    EmailModel
+      type object
+      required
+        - name
+        - surname
+        - phoneNumber
+      properties
+        name
+          type string
+          example Your name
+        surname
+          type string
+          example Your surname
+        phoneNumber
+          type integer
+          example 555
+    
+          
+          
+          
+          
+          
+          
+          
+          

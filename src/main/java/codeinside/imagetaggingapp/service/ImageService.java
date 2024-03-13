@@ -23,10 +23,10 @@ public class ImageService {
             ImageModel imageModel = new ImageModel();
             imageModel.setImageData(imageData);
 
-            // сохраняем изображение в базе данных
+            // сохраняние изображения в базе данных
             imageRepository.save(imageModel);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 

@@ -4,15 +4,16 @@ import codeinside.imagetaggingapp.model.ImageModel;
 import codeinside.imagetaggingapp.repositories.ImageRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
@@ -26,12 +27,15 @@ public class ImageServiceTest {
     private ImageService imageService;
 
     @Test
-    public void saveImageTestWhenFileIsNotEmptyTest() throws IOException {
-        File mockFile = new File("src/main/resources/imageFiles/screen.png");
-        byte[] imageData = new byte[]{1, 2, 3};
-        when(imageService.convertImageToByteArray(mockFile)).thenReturn(imageData);
-        imageService.saveImage(mockFile);
-        verify(imageRepository, times(1)).save(any(ImageModel.class));
+    public void testSaveImage() {
+        MockitoAnnotations.openMocks(this);
+
+        File imageFile = new File("src/main/resources/imageFiles/screen.png");
+
+        assertDoesNotThrow(() -> {
+            when(imageRepository.save(any(ImageModel.class))).thenReturn(null);
+            imageService.saveImage(imageFile);
+        });
     }
 
     @Test

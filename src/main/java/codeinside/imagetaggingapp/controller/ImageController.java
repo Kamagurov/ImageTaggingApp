@@ -23,13 +23,14 @@ public class ImageController {
     @Autowired
     private ImageService imageService;
 
-    @PostMapping("/upload")
+    @PostMapping(path = "/upload",
+            consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
+            produces = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<String> uploadImage(@RequestParam MultipartFile file) {
         try {
             File imageFile = convertMultipartFileToFile(file);
             imageService.saveImage(imageFile);
-            return ResponseEntity.status(HttpStatus.CREATED).body("Файл успешно сохранен");
-//            return ResponseEntity.status(HttpStatus.CREATED).build();
+            return ResponseEntity.status(HttpStatus.CREATED).body("Successful upload");
         } catch (IOException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to save image");
         }

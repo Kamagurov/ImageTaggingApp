@@ -1,5 +1,6 @@
 package codeinside.imagetaggingapp.service;
 
+import codeinside.NotValidIdException;
 import codeinside.imagetaggingapp.model.ImageModel;
 import codeinside.imagetaggingapp.repositories.ImageRepository;
 import lombok.AllArgsConstructor;
@@ -46,7 +47,7 @@ public class ImageService {
     }
 
     public ImageModel getImageById(Long id) {
-        return imageRepository.findById(id).orElse(null);
+        return imageRepository.findById(id).orElseThrow(() -> new NotValidIdException(id));
     }
 
     public void deleteImage(Long id) {

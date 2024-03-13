@@ -1,4 +1,4 @@
-package codeinside;
+package codeinside.imagetaggingapp.exception;
 
 public class NotValidIdException extends RuntimeException {
 

@@ -1,6 +1,6 @@
 package codeinside.imagetaggingapp.service;
 
-import codeinside.NotValidIdException;
+import codeinside.imagetaggingapp.exception.NotValidIdException;
 import codeinside.imagetaggingapp.model.ImageModel;
 import codeinside.imagetaggingapp.repositories.ImageRepository;
 import lombok.AllArgsConstructor;
